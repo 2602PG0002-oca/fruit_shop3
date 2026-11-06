@@ -1,0 +1,26 @@
+ja:
+  enums:
+    product:
+      status:
+        on_sale: 販売中
+        sold_out: 売り切れ
+
+  activerecord:
+    attributes:
+      product:
+        name: 商品名
+        description: 商品説明
+        price: 価格
+        photo: 画像
+        status: 販売状況
+      order:
+        address: 送り先
+      user:
+        name: ユーザ名
+
+  number:
+    currency:
+      format:
+        unit: "¥"
+        format: "%u%n"
+        precision: 0

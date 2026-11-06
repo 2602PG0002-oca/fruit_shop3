@@ -64,3 +64,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise"
+gem 'enum_help'
+gem 'rails-i18n'
+gem 'devise-i18n'
+gem 'ransack'

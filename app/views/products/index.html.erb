@@ -1,0 +1,40 @@
+<h1>商品一覧</h1>
+
+<% if current_user&.admin_flg %>
+  <%= link_to "新規登録", new_product_path %>
+<% end %>
+
+<h2>検索欄</h2>
+<%= search_form_for @q do |f| %>
+  <p>商品名 : <%= f.text_field :name_cont %></p>
+  <p>価格 : <%= f.number_field :price_eq %></p>
+  <%= f.submit "検索" %>
+<% end %>
+<hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th><%= sort_link(@q, :name, '商品名') %></th>
+      <th><%= sort_link(@q, :price, '価格') %></th>
+      <th>説明</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td>
+          <% if product.photo.attached? %>
+            <%= image_tag product.thumbnail %>
+          <% end %>
+        </td>
+        <td><%= product.name %></td>
+        <td><%= product.price %> 円</td>
+        <td><%= product.description %></td>
+        <td><%= link_to '詳細', product_path(product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

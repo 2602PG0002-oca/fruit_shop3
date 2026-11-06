@@ -1,0 +1,37 @@
+<h1>注文確認</h1>
+
+<%= form_with(model: @order) do |form| %>
+  <h3>注文商品一覧</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>個数</th>
+        <th>価格</th>
+        <th>小計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_details.each do |detail| %>
+        <tr>
+          <td><%= detail.product.name %></td>
+          <td><%= detail.quantity %></td>
+          <td><%= "¥" + number_with_delimiter(detail.price) %></td>
+          <td><%= "¥" + number_with_delimiter(detail.price * detail.quantity) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h4>合計金額</h4>
+  <%= "¥" + number_with_delimiter(@order.total_price) %>
+  <%= form.hidden_field :total_price, value: @order.total_price %>
+
+  <h4>送り先</h4>
+  <%= @order.address %>
+  <%= form.hidden_field :address, value: @order.address %>
+
+  <div class="actions">
+    <%= form.submit '注文確定' %>
+  </div>
+<% end %>

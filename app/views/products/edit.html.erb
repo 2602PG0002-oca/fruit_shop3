@@ -1,0 +1,45 @@
+<h1>商品編集</h1>
+
+<%= form_with model: @product do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :photo, "画像" %>
+    <%= f.file_field :photo %>
+  </div>
+
+  <div>
+    <%= f.label :name, "商品名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "商品説明" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :price, "価格" %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :status, "販売状況" %>
+    <% Product.statuses.keys.each do |status| %>
+      <%= f.radio_button :status, status %>
+      <%= f.label :status, I18n.t("enums.product.status.#{status}"), value: status %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit "更新" %>
+  </div>
+<% end %>
